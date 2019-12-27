@@ -13,5 +13,7 @@ return [
     //数据库配置1  查询用户表数据库
     'db_config1' => 'mysql://detuo:DT@pt18cg@172.27.148.98:3306/sip_data_base#utf8',
     //数据库配置2 本地数据库
-    'db_config2' => 'mysql://root:123456@192.168.83.8:3306/api_manage#utf8',
+//    'db_config2' => 'mysql://root:123456@192.168.83.8:3306/api_manage#utf8',
+    //数据库配置2 本地数据库
+    'db_config2' => 'mysql://root:Zhy172976@111.229.179.2:3306/api_manage#utf8',
 ];

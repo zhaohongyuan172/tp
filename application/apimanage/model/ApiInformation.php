@@ -23,14 +23,14 @@ class ApiInformation extends Model
      */
     public function __construct()
     {
-        $this->connection1 = Db::connect('mysql://root:123456@192.168.83.8:3306/api_manage#utf8');
+        $this->connection1 = Db::connect('mysql://root:Zhy172976@111.229.179.2:3306/api_manage#utf8');
     }
     /*
     * api详情页面
     */
     public function show_api_detail($userid)
     {
-        $db = Db::connect('mysql://root:123456@192.168.83.8:3306/api_manage#utf8');
+        $db = Db::connect('mysql://root:Zhy172976@111.229.179.2:3306/api_manage#utf8');
        // $list1 = $db->name('dt_apimanage_api_register')->where('is_delete','1')->where('registerId',$userid)->paginate(2);
         $list = $db->name('dt_apimanage_api_register')->where('is_delete','1')->where('registerId',$userid)->select();
         $count = $db->name('dt_apimanage_api_register')->where('is_delete','1')->where('registerId',$userid)->count();
@@ -46,7 +46,7 @@ class ApiInformation extends Model
     public function bind_catalog($cata_id, $userid, $api_path)
     {
         $sql = "update dt_apimanage_api_register set cataId = '{$cata_id}',is_mount = '1' where registerId = '{$userid}' and api_path = '{$api_path}'";
-        $res = Db::connect('mysql://root:123456@192.168.83.8:3306/api_manage#utf8')->execute($sql);
+        $res = Db::connect('mysql://root:Zhy172976@111.229.179.2:3306/api_manage#utf8')->execute($sql);
         return $res;
     }
 
@@ -57,7 +57,7 @@ class ApiInformation extends Model
     {
         $sql = "update `dt_apimanage_api_register` set {$update_set} where id = '{$data['id']}'";
 //        print_r($sql);die;
-        $res = Db::connect('mysql://root:123456@192.168.83.8:3306/api_manage#utf8')->execute($sql);
+        $res = Db::connect('mysql://root:Zhy172976@111.229.179.2:3306/api_manage#utf8')->execute($sql);
         return $res;
     }
 
@@ -67,7 +67,7 @@ class ApiInformation extends Model
     public function api_delete($id)
     {
         $sql = "update `dt_apimanage_api_register` set is_delete = '2' where id = {$id}";
-        $res = Db::connect('mysql://root:123456@192.168.83.8:3306/api_manage#utf8')->execute($sql);
+        $res = Db::connect('mysql://root:Zhy172976@111.229.179.2:3306/api_manage#utf8')->execute($sql);
         return $res;
     }
 
@@ -84,7 +84,7 @@ class ApiInformation extends Model
      */
     public function apilist($userid)
     {
-        $db = Db::connect('mysql://root:123456@192.168.83.8:3306/api_manage#utf8');
+        $db = Db::connect('mysql://root:Zhy172976@111.229.179.2:3306/api_manage#utf8');
         $data = $db->name('dt_apimanage_api_register')->where('registerId', $userid)->where('is_mount', 0)->where('is_delete', 1)->select();
         return $data;
     }

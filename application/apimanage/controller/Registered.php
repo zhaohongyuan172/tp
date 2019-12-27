@@ -21,16 +21,14 @@ class Registered extends Controller
     protected function _initialize()
     {
         parent::_initialize();
-        $this->database_url = Config::get('url')['database_url'];
+        $this->database_url = 'mysql://root:Zhy172976@111.229.179.2:3306/api_manage#utf8';
         $this->sendPY_url = Config::get('url')['sendPY_url'];
     }
 
     public function test()
     {
-
         return view('Api_Manage/test');
         //return $this->show_index('apiList');
-
     }
 
     /*
@@ -75,12 +73,12 @@ class Registered extends Controller
         $data['code'] = uniqid();
 
         //获取用户信息
-
         //判断该API是否已在数据库中存在
         $res = Db::connect($this->database_url)
             ->table('dt_apimanage_api_register')
             ->where('api_path',$data['api_path'])
             ->find();
+
         if($res){   //已存在
             //弹出操作失败信息，并跳转到原页面
             //$this->error('该服务已存在');
@@ -89,7 +87,6 @@ class Registered extends Controller
 
             //将收集信息存入数据库
             $res = insert($data, 'dt_apimanage_api_register');
-
             //api录入成功，将其他信息存入dt_apimanage_api_encapsulate表
             if($res){
                 //封装新的API URL 调用encapsulation接口
@@ -172,7 +169,7 @@ class Registered extends Controller
         //查询重定向前的api url在数据库中的主键id
         $sql = 'select id from dt_apimanage_api_register where api_path = \'' . $url . '\'' . "and registerId = '$userid'";
         //dy($sql);
-        $res = Db::connect('mysql://root:123456@192.168.83.8:3306/api_manage#utf8')->query($sql);
+        $res = Db::connect('mysql://root:Zhy172976@111.229.179.2:3306/api_manage#utf8')->query($sql);
         //dy(Db::connect(db_config2));
         //dy($res);
         $url_new = 'http://127.0.0.1:80/project/public/Api?id=' . $res[0]['id'];

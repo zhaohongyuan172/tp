@@ -89,7 +89,7 @@ class Login extends Controller
         //$data = $_POST;
         $data = input();
 
-
+//echo 100;die;
 //        $data['userid'] = '1234';
 //        $data['password'] = '56789';
 
@@ -116,9 +116,9 @@ class Login extends Controller
 //            $this->error('用户不存在，登录失败');
 //        }
         //查询的机构编码和机构名称
-        $opeID = "select OPERATOR_ID, from cap_user where USER_ID = '$data[userid]'";
-        $orgID = "select ORGID from org_employee where OPERATORID = '$opeID'";
-        $ddd = "select ORGID,ORGNAME from org_organization ORGID = '$orgID'";
+//        $opeID = "select OPERATOR_ID, from cap_user where USER_ID = '$data[userid]'";
+//        $orgID = "select ORGID from org_employee where OPERATORID = '$opeID'";
+//        $ddd = "select ORGID,ORGNAME from org_organization ORGID = '$orgID'";
 
         //------使用封装的公共方法 查询用户的机构编码和机构名称-------------
         //$user_data = user_info($data['userid']);
@@ -132,12 +132,12 @@ class Login extends Controller
         $_SESSION['Orgid'] = 'a1b2c3';
         $_SESSION['Orgname'] = '大数据中心';
 
-
+//print_r($_SESSION);die;
         //登录日志记录
         $insert['userid'] = $data['userid'];
         $insert['log_time'] = date('Y-m-d H:i:s',time());
         $insert['store_time'] = date('Y-m-d H:i:s',time());
-        $ddd = $this->loginModel->log_login($insert);
+        $ddd = $this->loginModel->test($insert);
 
 
 

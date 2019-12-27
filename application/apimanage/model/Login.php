@@ -25,7 +25,7 @@ class Login extends  Model
     public function __construct()
     {
         parent::__construct();
-        $this->connection1 = Db::connect('mysql://root:123456@192.168.83.8:3306/api_manage#utf8');
+        $this->connection1 = Db::connect('mysql://root:Zhy172976@111.229.179.2:3306/api_manage#utf8');
     }
 
     public function test(){

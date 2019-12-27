@@ -244,7 +244,8 @@ return [
     //url地址配置
     'url' => [
     //'database_url' => "pgsql://stork:stork@172.26.16.90:14103/apifz#utf8",
-    'database_url' => "mysql://root:123456@192.168.83.8/api_manage#utf8",
+//    'database_url' => "mysql://root:123456@192.168.83.8/api_manage#utf8",
+    'database_url' => "mysql://root:Zhy172976@111.229.179.2:3306/api_manage#utf8",
     'sendPY_url' => "http://172.26.16.2:8080/catalog/rest/services/catalogService/mountService"
 ]
 ];

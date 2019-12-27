@@ -127,7 +127,7 @@ function insert($post = [],$table = null,$buKey = '',$buVal = '')
     }else{
         $sql = "INSERT INTO {$table} (".$keys.",".$buKey.") VALUES (".$values.",'".$buVal."') RETURNING albh";
     }
-    $res = $result = Db::connect('mysql://root:123456@192.168.83.8:3306/api_manage#utf8')->execute($sql);
+    $res = $result = Db::connect('mysql://root:Zhy172976@111.229.179.2:3306/api_manage#utf8')->execute($sql);
 //        dump($sql);
 //        var_dump($res);die;
     return $res;
@@ -352,4 +352,23 @@ function encodeResult($code, $message, $data = null)
 
 json($result,200, ['Access-Control-Allow-Origin'=> 'http://localhost:8080','Access-Control-Allow-Credentials'=>'true','Access-Control-Allow-Headers'=>'content-type,token,x-requested-with','Access-Control-Expose-Headers'=>'*','Access-Control-Allow-Methods'=>"GET,POST,PUT,DELETE,PATCH,OPTIONS"])->send();
      //return json_encode($result, JSON_UNESCAPED_UNICODE);
+}
+
+/*
+ * 打印方法
+ *
+ * */
+function dd(){
+    $args = func_get_args();
+    echo '<pre>';
+    $func = 'print_r';
+    if ($args[0] === false){
+        $func = 'var_dump';
+        unset($args[0]);
+    }
+    foreach ($args as $v){
+        $func($v);
+        echo '<br>';
+    }
+    die;
 }
