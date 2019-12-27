@@ -47,6 +47,7 @@ class Login extends Controller
      * 显示登录页面
      */
     public function index(){
+//        echo 111;die;
         return $this->fetch('Api_Manage/index');
     }
 
