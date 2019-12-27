@@ -15,7 +15,7 @@ return [
     // +----------------------------------------------------------------------
 
     // 应用调试模式
-    'app_debug'              => false,
+    'app_debug'              => true,
     // 应用Trace
     'app_trace'              => false,
     // 应用模式状态
@@ -207,7 +207,7 @@ return [
         // SESSION_ID的提交变量,解决flash上传跨域
         'var_session_id' => '',
         // SESSION 前缀
-        'prefix'         => 'think',
+        'prefix'         => '',
         // 驱动方式 支持redis memcache memcached
         'type'           => '',
         // 是否自动开启 SESSION
@@ -225,7 +225,7 @@ return [
         // cookie 保存路径
         'path'      => '/',
         // cookie 有效域名
-        'domain'    => '',
+        'domain'    => 'http://localhost:8080',
         //  cookie 启用安全传输
         'secure'    => false,
         // httponly设置
@@ -240,4 +240,11 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+
+    //url地址配置
+    'url' => [
+    //'database_url' => "pgsql://stork:stork@172.26.16.90:14103/apifz#utf8",
+    'database_url' => "mysql://root:123456@192.168.83.8/api_manage#utf8",
+    'sendPY_url' => "http://172.26.16.2:8080/catalog/rest/services/catalogService/mountService"
+]
 ];
