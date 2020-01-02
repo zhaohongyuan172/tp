@@ -109,38 +109,17 @@ class Login extends Controller
 //            $this->error('验证码验证失败');
 //        }
 
-        //验证用户
-        //连接数据库并查询用户
-//        $sql = 'select OPERATOR_ID from cap_user where  USER_ID = ' . $data['userid'];
-//        $result = Db::connect('mysql://detuo:DT@pt18cg@172.27.148.98:3306/sip_data_base#utf8')->query($sql);
-//        if(!$result){
-//            $this->error('用户不存在，登录失败');
-//        }
-        //查询的机构编码和机构名称
-//        $opeID = "select OPERATOR_ID, from cap_user where USER_ID = '$data[userid]'";
-//        $orgID = "select ORGID from org_employee where OPERATORID = '$opeID'";
-//        $ddd = "select ORGID,ORGNAME from org_organization ORGID = '$orgID'";
-
-        //------使用封装的公共方法 查询用户的机构编码和机构名称-------------
-        //$user_data = user_info($data['userid']);
-        //------使用封装的公共方法 查询用户的机构编码和机构名称-------------
-
         //登录成功，记录session
         @session_start();
         $_SESSION['userid'] = $data['userid'];
-        //$_SESSION['Orgid'] = $ddd[0]['ORGID'];
-       // $_SESSION['Orgname'] = $ddd[0]['ORGNAME'];
         $_SESSION['Orgid'] = 'a1b2c3';
         $_SESSION['Orgname'] = '大数据中心';
 
-//print_r($_SESSION);die;
         //登录日志记录
         $insert['userid'] = $data['userid'];
         $insert['log_time'] = date('Y-m-d H:i:s',time());
         $insert['store_time'] = date('Y-m-d H:i:s',time());
-        $ddd = $this->loginModel->test($insert);
-
-
+        $ddd = $this->loginModel->log_login($insert);
 
         if($ddd){
             //跳转到展示页面
