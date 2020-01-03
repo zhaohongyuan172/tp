@@ -40,9 +40,6 @@ class Login extends Controller
 
     }
 
-
-
-
     /*
      * 显示登录页面
      */
@@ -50,10 +47,6 @@ class Login extends Controller
 //        echo 111;die;
         return $this->fetch('Api_Manage/index');
     }
-
-
-
-
 
     /*
      * 生成验证码
@@ -89,8 +82,6 @@ class Login extends Controller
     public function login(){
         //$data = $_POST;
         $data = input();
-
-//echo 100;die;
 //        $data['userid'] = '1234';
 //        $data['password'] = '56789';
 
@@ -99,15 +90,9 @@ class Login extends Controller
 
             return error('用户名，密码不能为空');
         }
-
         //过滤用户登录信息
         $data['userid'] = stripslashes($data['userid']);
         $data['userid'] = htmlspecialchars($data['userid']);
-
-        //验证码验证
-//        if(!$this->check_Verification_code($data['vcode'])){
-//            $this->error('验证码验证失败');
-//        }
 
         //登录成功，记录session
         @session_start();

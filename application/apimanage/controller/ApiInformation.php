@@ -122,22 +122,13 @@ class ApiInformation extends Controller
         //登录验证
         //$this->check_user_id($user_id);
         $id = input();
-//        var_dump($id);die;
-        $db = Db::connect('mysql://root:123456@192.168.83.8:3306/api_manage#utf8');
-//        echo 11;die;
+        $db = Db::connect('mysql://root:Zhy172976@111.229.179.2:3306/api_manage#utf8');
         $list1 = $db->name('dt_apimanage_api_register')->where('id',$id['id'])->select();
-
         if ($list1) {
             return success($list1);
         } else {
-            return eror();
+            return error();
         }
-//        var_dump($list1);die;
-        // 模板变量赋值
-       // $this->assign('list', $list1[0]);
-//        var_dump(json_encode($list1));die;
-        // 渲染模板输出
-       // return $this->fetch('Api_Manage/edit');
     }
     /*
      * api信息的编辑
