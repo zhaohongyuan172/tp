@@ -21,6 +21,7 @@ class Registered extends Controller
     protected function _initialize()
     {
         parent::_initialize();
+        $this->connection1 = Db::connect('mysql://root:Zhy172976@111.229.179.2:3306/api_manage#utf8');
         $this->database_url = 'mysql://root:Zhy172976@111.229.179.2:3306/api_manage#utf8';
         $this->sendPY_url = Config::get('url')['sendPY_url'];
     }
@@ -53,7 +54,6 @@ class Registered extends Controller
         //用户登录验证
         @session_start();
         $res = $_SESSION;
-//        print_r($res);die;
 
         if(!isset($res['userid'])){
           return error('请先登录');
@@ -74,12 +74,10 @@ class Registered extends Controller
 
         //获取用户信息
         //判断该API是否已在数据库中存在
-        $res = Db::connect($this->database_url)
-            ->table('dt_apimanage_api_register')
-            ->where('api_path',$data['api_path'])
-            ->find();
+        $sql = "select count(id) as num from dt_apimanage_api_register where api_path = '{$data['api_path']}'";
+        $res = $this->connection1->query($sql);
 
-        if($res){   //已存在
+        if($res[0]['num']){   //已存在
             //弹出操作失败信息，并跳转到原页面
             //$this->error('该服务已存在');
             return error_msg('该服务已存在');
@@ -138,26 +136,14 @@ class Registered extends Controller
         $deptId = $_SESSION['Orgid'];
         $dept = $_SESSION['Orgname'];
 
-
         //返回用户信息
         //$user_info = $this->user_info($user_id);
-
         $user_info = [
             'registerId' => $registerId,
             'deptId' => $deptId,
             'dept' => $dept
         ];
-
-        /*        $user_info = [
-            'registerId' => 'HBGBM',
-            'register' => 'HBGBM',
-            'deptId' => '1665',
-            'dept' => '上海中国航海博物馆'
-        ];*/
-
         return view('Api_Manage/add', ['user_info' => $user_info]);
-
-        //return view('Api_Manage/add');
     }
 
     /*
@@ -168,10 +154,7 @@ class Registered extends Controller
     public function encapsulation($url,$userid){
         //查询重定向前的api url在数据库中的主键id
         $sql = 'select id from dt_apimanage_api_register where api_path = \'' . $url . '\'' . "and registerId = '$userid'";
-        //dy($sql);
         $res = Db::connect('mysql://root:Zhy172976@111.229.179.2:3306/api_manage#utf8')->query($sql);
-        //dy(Db::connect(db_config2));
-        //dy($res);
         $url_new = 'http://127.0.0.1:80/project/public/Api?id=' . $res[0]['id'];
         return $url_new;
     }
@@ -181,7 +164,6 @@ class Registered extends Controller
      *
      *  */
     public function api_list(){
-
         @session_start();
         session('userid','1231412');
        // $user_id = session('userid');
@@ -196,9 +178,7 @@ class Registered extends Controller
             ->where('registerId', $user_id)
             ->select();
 
-
         return view('Api_Manage/apiList', $res);
-
     }
 
 
@@ -252,7 +232,6 @@ class Registered extends Controller
 
         //获取userid
         //$user_id = session('userid');
-
 
         $res = Db::connect('mysql://detuo:DT@pt18cg@172.27.148.98/sip_data_base#utf8')
             ->table('cap_user u')
